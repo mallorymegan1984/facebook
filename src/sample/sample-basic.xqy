@@ -4,6 +4,7 @@ import module namespace mlfb="http://marklogic.com/xdmp/facebook" at "/facebook/
 
 declare namespace fb="http://api.facebook.com/1.0/"
 
+try {
 let $app-api-key := 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 let $app-secret := 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
 
@@ -49,4 +50,12 @@ return
                 )
         )
 )
+}
+catch ($e) {
+(
+    <p>Sorry, an error occured on this page.</p>
+    ,
+    xdmp:log($e)
+)
+}
 

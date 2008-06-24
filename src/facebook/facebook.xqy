@@ -396,13 +396,16 @@ define function mlfb:post-method(
         then
                 if (fn:count($result-of-post) lt 2)
                 then
-                        fn:error()
+                        fn:error("FACEBOOK-INVALID-HTTP-RESPONSE", $result-of-post)
+                else if ($result-of-post[2]/fb:error_response)
+                then
+                        fn:error("FACEBOOK-API-ERROR-RESPONSE", $result-of-post)
                 else
                     (xdmp:log(xdmp:quote($result-of-post[2])),
                         $result-of-post[2]
                     )
         else
-                fn:error()
+                fn:error(fn:error("FACEBOOK-NO-HTTP-RESPONSE"))
 
 }
 

@@ -4,9 +4,9 @@ import module namespace mlfb="http://marklogic.com/xdmp/facebook" at "/facebook/
 
 declare namespace fb="http://api.facebook.com/1.0/"
 
+try {
 let $app-api-key := 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 let $app-secret := 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
-
 
 let $facebook := mlfb:facebook-create-config($app-api-key, $app-secret)
 let $user-id := mlfb:get-user($facebook)
@@ -40,11 +40,11 @@ return
                 ,
                 <br />
                 ,
-                "Attendees: "
+                "Some of the attendees: "
                 ,
                 <br />
                 ,
-                for $attendee in $attendees
+                for $attendee in $attendees[1 to 10]
                 return ("-", <fb:name uid="{$attendee}" useyou="false" linked="false" />, <br />)
             )
             }
@@ -93,4 +93,12 @@ return
             )
         )
 )
+}
+catch ($e) {
+(
+    <p>Sorry, an error occured on this page.</p>
+    ,
+    xdmp:log($e)
+)
+}
 
