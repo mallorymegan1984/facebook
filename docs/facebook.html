@@ -48,10 +48,7 @@
  <tr>
 			    <td style="font-family:arial;font-size:10pt">
 <p class="pa-2 ca-0"><b>Summary and Notes</b></p>
-<p>The facebook function module is installed as the following file:</p><ul>
-				<li><code><em>fbsample</em>/facebook/facebook.xqy</code></li>
-			      </ul><p>where <code><em>fbsample</em></code> is the directory in which 
-    the Facebook XQuery sample application is contained.</p><p> To use the facebook.xqy module in your own XQuery modules, include the 
+<p>To use the facebook.xqy module in your own XQuery modules, include the 
     following line in your XQuery prolog:</p><p><code>import module "http://marklogic.com/xdmp/facebook" at 
              "/facebook/facebook.xqy";</code></p><p>The library uses the <code>mlfb:</code> namespace, which is 
 	    <code>not</code> predefined in the server.</p>
@@ -63,36 +60,46 @@
 <p class="pa-2 ca-0">The Facebook Platform API uses a REST-like interface. This means that the Facebook method calls are made over the internet by sending HTTP GET or POST requests to the Facebook API REST server.</p>
 <p class="pa-2 ca-0"><br/></p>
 <p class="pa-2 ca-0"><b>Setup Instructions</b></p>
-<p class="pa-2 ca-0">Before using the API, the developer must create a new application using the Facebook Developer application found here: 
-<a href="http://www.facebook.com/developers/editapp.php?new"><span class="ca-0 c6">http://www.facebook.com/developers/editapp.php?new</span>
-</a>.</p>
-<p class="pa-2 ca-0">Within the settings for the application, be sure to set the following fields:</p>
+<p class="pa-2 ca-0">Copy the files from the <code><em>src</em></code> folder into some directory on your file system, let's call it <code><em>/myprojectpath/</em></code>.</p>
+<p class="pa-2 ca-0">Use the admin UI to point an HTTP server at the <code><em>/myprojectpath/</em></code> directory.</p>
+<p class="pa-2 ca-0">Make sure that your HTTP server is accessible to the outide world (outside of your firewall).  Facebook's servers will make HTTP calls to your server.  When registering your application, you will provide Facebook with a callback URL for your application.</p>
+<p class="pa-2 ca-0">Within the settings for the application, be sure to set the following fields (Facebook's websites describes the same process in steps #1 through #8 a the following URL http://developers.facebook.com/step_by_step.php#hello ):</p>
 <ul>
-				  <li class="pa-3 c7"><span class="ca-0">The Callback URL should be set to the URL of the directory containing index.xqy on the HTTP server containing the application.  Example: </span> <a href="http://facebook.demo.marklogic.com:8031/sample/"><span class="ca-0 c6">http://facebook.demo.marklogic.com:8031/sample/</span></a> </li>
+				  <li class="pa-3 c7">Before using the API, the developer must create a new application using the Facebook Developer application found here: <a href="http://www.facebook.com/developers/editapp.php?new"><span class="ca-0 c6">http://www.facebook.com/developers/editapp.php?new</span></a>.</li>
+				  <li class="pa-3 c7"><span class="ca-0">The Callback URL should be set to the URL of the directory containing index.xqy on the HTTP server containing the application.  Be sure to include the trailing slash ("/") at the end of the URL.  Example: </span> <a href=""><span class="ca-0 c6">http://facebook.demo.marklogic.com:8099/sample/</span></a> </li>
 				  <li class="pa-3 c7"><span class="ca-0">Be sure to set the Canvas Page URL and the Developer Contact E-mail.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">The check box for "Can your application be added on Facebook?" should be checked.</span> </li>
-				  <li class="pa-3 c7"><span class="ca-0">The Post Add URL and Side Nav URL should be set to the Canvas Page URL (ex: </span> <a href="http://apps.facebook.com/yourappnamehere/"><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> <span class="ca-0"> - where "yourappnamehere" is the name specified for the Canvas Page URL field within the same page).</span> </li>
+				  <li class="pa-3 c7"><span class="ca-0">The Post Add URL and Side Nav URL should be set to the Canvas Page URL (ex: </span> <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> <span class="ca-0"> - where "yourappnamehere" is the name specified for the Canvas Page URL field within the same page).  For this URL, not specifying a file name at the end of the URL implies the usage of index.xqy.  When we visit  <a href=""><span>http://apps.facebook.com/yourappnamehere/</span></a>, we are actually visiting  <a href=""><span>http://apps.facebook.com/yourappnamehere/index.xqy</span></a>.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">For the field "Who can add your application to their Facebook account?", check the checkbox for "Users" and select "All Pages" for the radio selection.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">If you desire to keep the application private through development, be sure to check the box for "Developer Mode" so that only developers for the application can view the application.</span> </li>
-				</ul>
-<p class="pa-2 ca-0">Copy the files from the <code><em>src</em></code> directory into the <code><em>fbsample</em></code> directory.</p>
-<p class="pa-2 ca-0">Point your HTTP server at the <code><em>fbsample</em></code> directory.</p>
-<p class="pa-2 ca-0">Edit the API Key and Secret Key as the variables $app-api-key and $app-secret (at the top of all files in the <code><em>fbsample</em>/sample/</code> directory) to match the API Key and Secret Key provided for your application through the Developer application.</p>
+</ul>
+<p class="pa-2 ca-0">Edit the API Key and Secret Key as the variables $app-api-key and $app-secret (at the top of all files in the <code><em>/myprojectpath/sample/</em></code> directory) to match the API Key and Secret Key provided for your application through the Developer application.</p>
 <p class="pa-2 ca-0">And you're done! Visit <a href="http://apps.facebook.com/yourappnamehere/"><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> to install the sample application and use it.</p>
+<p class="pa-2 ca-0"><br/></p>
+<p class="pa-2 ca-0"><b>What's Included</b></p>
+<p class="pa-2 ca-0">There are two folders found in the <code><em>src</em></code> folder: <code><em>facebook</em></code> and <code><em>sample</em></code>.</p>
+<p class="pa-2 ca-0">The <code><em>facebook</em></code> folder contains only one file (<code><em>facebook.xqy</em></code>) which is the only module necessary to import in order to use the Facebook platform.</p>
+<p class="pa-2 ca-0">The <code><em>facebook</em></code> folder contains three files (<code><em>index.xqy</em></code>, <code><em>sample-basic.xqy</em></code>, and <code><em>sample-extended.xqy</em></code>).  Each of these files are examples of sample canvas pages for your application and can be accessed by visiting the URLs <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/index.xqy</span></a> (which is equivalent to visiting <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a>), <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/sample-basic.xqy</span></a>, and <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/sample-extended.xqy</span></a> respectively.</p>
+<p class="pa-2 ca-0">The file <code><em>index.xqy</em></code> is an extremely simple Hello World application canvas page.  The code in this file creates an application configuration, redirects the user to login if necessary, displays the user's name with <a href="http://wiki.developers.facebook.com/index.php/FBML"><span>FBML</span></a>, and displays up to 25 of the user's friends.  Equivalent PHP Hello World code (provided by Facebook whenever you register an application) can be found commented out at the end of the file.</p>
+<p class="pa-2 ca-0">The code in the file <code><em>sample-basic.xqy</em></code> does everything that the code in <code><em>index.xqy</em></code> does except that it also has a few best practices.  The code redirects the user if they have not added the application (adding an application is a separate process from logging into an application - Facebook claims that it will be merging these two processes into one some time in the middle of 2008).  The code also uses a try-catch statement to catch exceptions and sets the user's profile box.</p>
+<p class="pa-2 ca-0">The code in the file <code><em>sample-extended.xqy</em></code> does everything that the code in <code><em>sample-basic.xqy</em></code> does except that it also calls a bunch of additional functions from the library, such as displaying the user's events and creating a feed item.</p>
 <p class="pa-2 ca-0"><br/></p>
 <p class="pa-2 ca-0"><b>XQuery Facebook Platform Functions</b></p>
 <p class="pa-2 ca-0">All functions that map to functions specified in the Facebook API shall make up to five attempts to retry the method if the connection the Facebook server is dropped.</p>
 <p class="pa-2 ca-0">Some methods available through the Facebook Platform API do not have an equivalent XQuery Facebook Library function.  These methods are either deprecated, in Beta, newly released, or not typically used (such as the Market-place methods).  Any function correlating to a platform API method that is not available through the library can be written by using the function mlfb:post-method.  Please view the code for any of the library functions that utilize a Facebook Platform API method for assistance in writing XQuery functions for any method without a corresponding function.  We encourage you to add new functions to the project for this library.</p>
 <p class="pa-2 ca-0">Support for iframes and for cookies is not currently built into the library.</p>
 <p class="pa-2 ca-0"><br/></p>
-<p class="pa-2 ca-0"><b>Naming Convention:</b></p>
+<p class="pa-2 ca-0"><b>Naming Convention</b></p>
 <p class="pa-2 ca-0">The names for all library functions that mirror functions from the Facebook Platform API have been converted from camel-style to words separated by dashes.  Other than the style, the words making up the functions are taken from the Facebook Platform API found at 
 <a href="http://wiki.developers.facebook.com/index.php/API">the Facebook API reference page</a>.</p>
 <p class="pa-2"><span class="ca-0">Any function arguments marked as "optional" must be set to the variable $mlfb:null if the user does not want to use them.  Every Facebook API function designated to return a type </span><span class="ca-2">node()</span><span class="ca-0"> will return an XML node in the formats specified by the Facebook Platform API found here: </span>
 <a href="http://wiki.developers.facebook.com/index.php/API">the Facebook API reference page</a><span class="ca-0">.</span></p>
 <p class="pa-2 ca-0"><br/></p>
-
-
+<p class="pa-2 ca-0"><b>Recommended Resources</b></p>
+<p class="pa-2 ca-0">The developer wiki: <a href="http://wiki.developers.facebook.com/index.php/Main_Page"><span>http://wiki.developers.facebook.com/index.php/Main_Page</span></a></p>
+<p class="pa-2 ca-0">The developer forum: <a href="http://forum.developers.facebook.com/"><span>http://forum.developers.facebook.com/</span></a></p>
+<p class="pa-2 ca-0">If you don't know what a canvas page or a profile box are: <a href="http://wiki.developers.facebook.com/index.php/Anatomy_of_a_Facebook_App"><span>http://wiki.developers.facebook.com/index.php/Anatomy_of_a_Facebook_App</span></a></p>
+<p class="pa-2 ca-0">If you want to understand more about how the callback URL works: <a href="http://wiki.developers.facebook.com/index.php/Your_callback_page_and_you"><span>http://wiki.developers.facebook.com/index.php/Your_callback_page_and_you</span></a></p>
 
 
 
