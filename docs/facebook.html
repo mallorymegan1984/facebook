@@ -50,7 +50,9 @@
 <p class="pa-2 ca-0"><b>Summary and Notes</b></p>
 <p>To use the facebook.xqy module in your own XQuery modules, include the 
     following line in your XQuery prolog:</p><p><code>import module "http://marklogic.com/xdmp/facebook" at 
-             "/facebook/facebook.xqy";</code></p><p>The library uses the <code>mlfb:</code> namespace, which is 
+             "/facebook/facebook.xqy";</code></p>
+             <p>The <code><em>facebook.xqy</em></code> library module should be under your HTTP App Server root</p>
+             <p>The library uses the <code>mlfb:</code> namespace, which is 
 	    <code>not</code> predefined in the server.</p>
   <p>
 
@@ -60,21 +62,21 @@
 <p class="pa-2 ca-0">The Facebook Platform API uses a REST-like interface. This means that the Facebook method calls are made over the internet by sending HTTP GET or POST requests to the Facebook API REST server.</p>
 <p class="pa-2 ca-0"><br/></p>
 <p class="pa-2 ca-0"><b>Setup Instructions</b></p>
-<p class="pa-2 ca-0">Copy the files from the <code><em>src</em></code> folder into some directory on your file system, let's call it <code><em>/myprojectpath/</em></code>.</p>
-<p class="pa-2 ca-0">Use the admin UI to point an HTTP server at the <code><em>/myprojectpath/</em></code> directory. Use application-level security for this HTTP server.</p>
-<p class="pa-2 ca-0">Make sure that your HTTP server is accessible to the outide world (outside of your firewall).  Facebook's servers will make HTTP calls to your server.  When registering your application, you will provide Facebook with a callback URL for your application.</p>
-<p class="pa-2 ca-0">Within the settings for the application, be sure to set the following fields (Facebook's websites describes the same process in steps #1 through #8 a the following URL http://developers.facebook.com/step_by_step.php#hello ):</p>
+<p class="pa-2 ca-0"><b>1)</b> Copy the files from the <code><em>src</em></code> folder into some directory on your file system, let's call it <code><em>/myprojectpath/</em></code>.</p>
+<p class="pa-2 ca-0"><b>2)</b> Use the admin UI to point an HTTP server at the <code><em>/myprojectpath/</em></code> directory. Use application-level security for this HTTP server.  The default user for this HTTP server can be any user that you choose, and that user can have any roles that you choose.  For the most basic case, a default user of the 'nobody' user will be fine.</p>
+<p class="pa-2 ca-0"><b>3)</b> Make sure that your HTTP server is accessible to the outide world (outside of your firewall).  Facebook's servers will make HTTP calls to your server.  When registering your application, you will provide Facebook with a callback URL for your application.</p>
+<p class="pa-2 ca-0"><b>4)</b> Within the settings for the application, be sure to set the following fields (Facebook's websites describes the same process in steps #1 through #8 at the following URL <a href="http://developers.facebook.com/step_by_step.php#hello"><span class="ca-0 c6">http://developers.facebook.com/step_by_step.php#hello</span></a> ):</p>
 <ul>
 				  <li class="pa-3 c7">Before using the API, the developer must create a new application using the Facebook Developer application found here: <a href="http://www.facebook.com/developers/editapp.php?new"><span class="ca-0 c6">http://www.facebook.com/developers/editapp.php?new</span></a>.</li>
-				  <li class="pa-3 c7"><span class="ca-0">The Callback URL should be set to the URL of the directory containing index.xqy on the HTTP server containing the application.  Be sure to include the trailing slash ("/") at the end of the URL.  Example: </span> <a href=""><span class="ca-0 c6">http://facebook.demo.marklogic.com:8099/sample/</span></a> </li>
+				  <li class="pa-3 c7"><span class="ca-0">The Callback URL should be set to the URL of the directory containing index.xqy on the HTTP server containing the application.  Be sure to include the trailing slash ("/") at the end of the URL.  Example: </span> <a href=""><span class="ca-0 c6">http://myservername.mycompanyurl.com:8099/sample/</span></a> </li>
 				  <li class="pa-3 c7"><span class="ca-0">Be sure to set the Canvas Page URL and the Developer Contact E-mail.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">The check box for "Can your application be added on Facebook?" should be checked.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">The Post Add URL and Side Nav URL should be set to the Canvas Page URL (ex: </span> <a href=""><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> <span class="ca-0"> - where "yourappnamehere" is the name specified for the Canvas Page URL field within the same page).  For this URL, not specifying a file name at the end of the URL implies the usage of index.xqy.  When we visit  <a href=""><span>http://apps.facebook.com/yourappnamehere/</span></a>, we are actually visiting  <a href=""><span>http://apps.facebook.com/yourappnamehere/index.xqy</span></a>.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">For the field "Who can add your application to their Facebook account?", check the checkbox for "Users" and select "All Pages" for the radio selection.</span> </li>
 				  <li class="pa-3 c7"><span class="ca-0">If you desire to keep the application private through development, be sure to check the box for "Developer Mode" so that only developers for the application can view the application.</span> </li>
 </ul>
-<p class="pa-2 ca-0">Edit the API Key and Secret Key as the variables $app-api-key and $app-secret (at the top of all files in the <code><em>/myprojectpath/sample/</em></code> directory) to match the API Key and Secret Key provided for your application through the Developer application.</p>
-<p class="pa-2 ca-0">And you're done! Visit <a href="http://apps.facebook.com/yourappnamehere/"><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> to install the sample application and use it.</p>
+<p class="pa-2 ca-0"><b>5)</b> Edit the API Key and Secret Key as the variables $app-api-key and $app-secret (at the top of all files in the <code><em>/myprojectpath/sample/</em></code> directory) to match the API Key and Secret Key provided for your application through the Developer application.</p>
+<p class="pa-2 ca-0"><b>6)</b> And you're done! Visit <a href="http://apps.facebook.com/yourappnamehere/"><span class="ca-0 c6">http://apps.facebook.com/yourappnamehere/</span></a> to install the sample application and use it.</p>
 <p class="pa-2 ca-0"><br/></p>
 <p class="pa-2 ca-0"><b>What's Included</b></p>
 <p class="pa-2 ca-0">There are two folders found in the <code><em>src</em></code> folder: <code><em>facebook</em></code> and <code><em>sample</em></code>.</p>
