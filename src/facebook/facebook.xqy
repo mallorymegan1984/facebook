@@ -88,7 +88,7 @@ define function mlfb:redirect-add(
     $facebook as element(mlfb:facebook-config)
 ) as xs:string?
 {
-    mlfb:redirect($facebook, mlfb:get-add-url($facebook))
+    mlfb:redirect($facebook, mlfb:get-add-url($facebook, ()))
 }
 
 define function mlfb:redirect(
@@ -105,7 +105,7 @@ define function mlfb:redirect(
 
 define function mlfb:get-login-url(
     $facebook as element(mlfb:facebook-config),
-    $next as xs:string
+    $next as xs:string?
 ) as xs:string
 {
     fn:concat(
@@ -114,15 +114,25 @@ define function mlfb:get-login-url(
         mlfb:get-api-key($facebook), 
         if ($next)
         then fn:concat('&next=', fn:encode-for-uri($next))
-        else ()
+        else (),
+        '&canvas'
     )
 }
 
 define function mlfb:get-add-url(
-    $facebook as element(mlfb:facebook-config)
+    $facebook as element(mlfb:facebook-config),
+    $next as xs:string?
 ) as xs:string
 {
-    fn:concat(mlfb:get-facebook-url(), '/add.php?api_key=', mlfb:get-api-key($facebook))
+    fn:concat(
+        mlfb:get-facebook-url(), 
+        '/add.php?api_key=', 
+        mlfb:get-api-key($facebook),
+        if ($next)
+        then fn:concat('&next=', fn:encode-for-uri($next))
+        else (),
+        '&canvas'
+    )
 }
 
 define function mlfb:get-facebook-url(

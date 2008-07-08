@@ -86,6 +86,7 @@ return
                     if ($political) then (" - Is politically ", $political) else ()
                 )
             ,
+            let $publish :=
             mlfb:feed-publish-action-of-user(
                 $facebook,
                 "performed a test action.",
@@ -99,6 +100,7 @@ return
                 $mlfb:null,
                 $mlfb:null
             )
+            return ()
         )
 )
 }
